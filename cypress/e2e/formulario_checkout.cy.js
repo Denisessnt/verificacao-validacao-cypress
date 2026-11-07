@@ -1,0 +1,15 @@
+describe('Campos para realizar checkout não são preenchidos', () => { 
+    it('Erro ao preencher o formulário de Checkout', () => {
+        cy.visit('https://www.saucedemo.com')
+        cy.get('[data-test="username"]').type('problem_user')
+        cy.get('[data-test="password"]').type('secret_sauce')
+        cy.get('[data-test="login-button"]').click()
+        cy.get('.shopping_cart_link').click()
+        cy.get('[data-test="checkout"]').click()
+        cy.get('[data-test="firstName"]').type('Denise')
+        cy.get('[data-test="lastName"]').type('Santos')
+        cy.get('[data-test="postalCode"]').type('62900000')
+        cy.get('[data-test="continue"]').click()
+        cy.url().should('include', 'checkout-step-two.html')
+    })
+}) 
